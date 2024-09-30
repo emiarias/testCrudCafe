@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path'
-import { fileURLToPath } from 'url';
+import { fileURLToPath} from 'url';
 import './src/database/databaseConnection.js'
+import productoRouter from './src/routes/productos.routes.js';
 
 //1- configurar un puerto
 const app = express();
@@ -26,8 +27,4 @@ const __dirname = path.dirname(__filename)
 app.use(express.static(path.join(__dirname,'/public'))) //configuramos un archivo estatico para ver el index.html en la ruta principal
 
 //3- configurar las rutas
-
-app.get('/prueba', (req, res)=>{
-    // console.log('desde la funcion de prueba')
-    res.send('Desde el backend del proyecto crudCafe')
-})
+app.use('/api',productoRouter)
